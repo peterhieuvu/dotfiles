@@ -9,6 +9,7 @@ alias ls="ls --color=auto"
 alias v="nvim"
 alias se="sudoedit"
 alias diff="diff --color"
+alias cdd="cd ~/Documents"
 
 # The following lines were added by compinstall
 
