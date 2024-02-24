@@ -1,17 +1,29 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-alias cdr='cd ~/Documents/Projects'
+alias ls="ls --color=auto"
+alias v="nvim"
+alias se="sudoedit"
+alias diff="diff --color"
 
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/';
-}
+# The following lines were added by compinstall
 
-# RPROMPT GIT
-# autoload -Uz vcs_info
-#precmd_vcs_info() { vcs_info }
-#precmd_functions+=( precmd_vcs_info )
-setopt prompt_subst
-#RPROMPT=\$vcs_info_msg_0_
-#zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
+zstyle ':completion:*' completer _complete _ignored
+zstyle :compinstall filename '/home/hieuy/.zshrc'
 
-# PROMPT='%(?.%F{green}√.%F{red}?%?)%f %n@%m:%B%F{blue}%~%f%b %F{red}$(parse_git_branch)%f %# '
-PROMPT='%(?.%F{green}√.%F{red}?%?)%f %B%F{blue}%~%f%b %F{red}$(parse_git_branch)%f %(!.#.$) '
+autoload -Uz compinit promptinit
+compinit
+promptinit
+# End of lines added by compinstall
+
+prompt walters
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export EDITOR=nvim
