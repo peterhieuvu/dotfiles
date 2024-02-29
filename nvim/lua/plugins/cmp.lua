@@ -1,4 +1,22 @@
 return {
+  -- 'tpope/vim-endwise',  TODO: to autocomplete end
+  -- 'tpope/vim-surround',  TODO: for html css editing
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    config = function ()
+      require('nvim-autopairs').setup {}
+      -- If you want insert `(` after select function or method item
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+      local cmp = require('cmp')
+      cmp.event:on(
+        'confirm_done',
+        cmp_autopairs.on_confirm_done()
+      )
+    end
+    -- use opts = {} for passing setup options
+    -- this is equalent to setup({}) function
+  },
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -51,14 +69,14 @@ return {
         -- No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = cmp.mapping.preset.insert {
           -- Select the [n]ext item
-          ['<C-n>'] = cmp.mapping.select_next_item(),
+          ['<C-j>'] = cmp.mapping.select_next_item(),
           -- Select the [p]revious item
-          ['<C-p>'] = cmp.mapping.select_prev_item(),
+          ['<C-k>'] = cmp.mapping.select_prev_item(),
 
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.confirm { select = true },
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
