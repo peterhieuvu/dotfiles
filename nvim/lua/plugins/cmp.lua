@@ -1,6 +1,4 @@
 return {
-  -- 'tpope/vim-endwise',  TODO: to autocomplete end
-  -- 'tpope/vim-surround',  TODO: for html css editing
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
@@ -41,7 +39,7 @@ return {
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
-      -- /cmp-buffer (lazyvim)
+      -- TODO: cmp-buffer (lazyvim)
 
       -- If you want to add a bunch of pre-configured snippets,
       --    you can use this plugin to help you. It even has snippets
@@ -76,7 +74,9 @@ return {
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<Tab>'] = cmp.mapping.confirm { select = true },
+          ['<CR>'] = cmp.mapping.confirm { select = true },
+
+          ['<C-e>'] = cmp.mapping.close(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display

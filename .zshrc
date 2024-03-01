@@ -28,3 +28,4 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export EDITOR=nvim
+source /usr/share/nvm/init-nvm.sh

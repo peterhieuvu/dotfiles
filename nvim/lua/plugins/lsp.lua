@@ -142,7 +142,7 @@ return {
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
+        tsserver = {},
         --
 
         lua_ls = {
@@ -156,8 +156,7 @@ return {
                 checkThirdParty = false,
                 -- Tells lua_ls where to find all the Lua files that you have loaded
                 -- for your neovim configuration.
-                library = {
-                  '${3rd}/luv/library',
+                library = { '${3rd}/luv/library',
                   unpack(vim.api.nvim_get_runtime_file('', true)),
                 },
                 -- If lua_ls is really slow on your computer, you can try this instead:
