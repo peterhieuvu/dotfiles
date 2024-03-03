@@ -30,4 +30,5 @@ This is a personal dotfiles repo
 23. conform
 24. nvim lint
 25. neoconf
+26. startify, dashboard?
 
