@@ -1,7 +1,7 @@
 -- [[ Keymaps ]]
 
 vim.g.mapleader = ' '
-vim.g.maplocalleader = '\\'
+vim.g.maplocalleader = ' '
 
 -- highlight on search, but clear on escape in normal mode
 vim.opt.hlsearch = true

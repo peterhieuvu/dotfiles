@@ -1,5 +1,4 @@
 return {
-  { "folke/neodev.nvim", opts = {} },
   { 'norcalli/nvim-colorizer.lua',
     config = function ()
       require('colorizer').setup()
@@ -40,16 +39,6 @@ return {
     end
   },
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    }
-  },
-  {
     "folke/which-key.nvim",
     event = "VeryLazy",
     init = function()
@@ -64,6 +53,7 @@ return {
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+        ['<leader>u'] = { name = '[U]other?', _ = 'which_key_ignore' },
       }
     end,
     opts = {

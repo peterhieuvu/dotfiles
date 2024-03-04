@@ -31,4 +31,5 @@ This is a personal dotfiles repo
 24. nvim lint
 25. neoconf
 26. startify, dashboard?
+27. lsp rename
 
