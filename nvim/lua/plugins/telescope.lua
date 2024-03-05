@@ -58,16 +58,17 @@ return {
         -- },
         -- pickers = {}
         extensions = {
-          ['ui-select'] = {
-            require('telescope.themes').get_dropdown(),
-          },
+          -- ['ui-select'] = {
+          --   require('telescope.themes').get_dropdown(),
+          -- },
         },
       }
 
       -- Enable telescope extensions, if they are installed
       pcall(require('telescope').load_extension, 'fzf')
-      pcall(require('telescope').load_extension, 'ui-select')
+      -- pcall(require('telescope').load_extension, 'ui-select')
       require("telescope").load_extension("notify")
+      require("telescope").load_extension("noice")
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -83,8 +84,12 @@ return {
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       vim.keymap.set('n', '<leader>sn', function ()
+        require('telescope').extensions.noice.noice()
+      end, { desc = '[S]earch [N]oice'})
+
+      vim.keymap.set('n', '<leader>sN', function ()
         require('telescope').extensions.notify.notify()
-      end, { desc = '[S]earch [N]otifications'})
+      end, { desc = '[S]earch [+N]otifications'})
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()

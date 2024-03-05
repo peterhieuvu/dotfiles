@@ -70,7 +70,7 @@ return {
         desc = "Toggle buffer view on right"
       },
       {
-        "<leader>g",
+        "<leader>gg",
         function ()
           require("neo-tree.command").execute({ position = "float", source = "git_status" })
         end,

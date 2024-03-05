@@ -10,7 +10,21 @@ return {
 
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'bash', 'lua', 'markdown', 'html', 'javascript', 'typescript', 'tsx', 'scss', 'python', 'latex' },
+        ensure_installed = {
+          'bash',
+          'vim',
+          'lua',
+          'regex',
+          'markdown',
+          'markdown_inline',
+          'html',
+          'javascript',
+          'typescript',
+          'tsx',
+          'scss',
+          'python',
+          'latex'
+        },
         auto_install = true,
         highlight = { enable = true },
         indent = { enable = true },

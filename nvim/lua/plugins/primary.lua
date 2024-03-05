@@ -9,7 +9,6 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
-    opts = {},
     config = function ()
       local highlight = {
           "RainbowRed",
@@ -35,7 +34,24 @@ return {
       end)
 
       -- require("ibl").setup { indent = { highlight = highlight } }
-      require("ibl").setup()
+      require("ibl").setup({
+        scope = { enabled = false },
+        exclude = {
+          filetypes = {
+            "help",
+            "alpha",
+            "dashboard",
+            "neo-tree",
+            "Trouble",
+            "trouble",
+            "lazy",
+            "mason",
+            "notify",
+            "toggleterm",
+            "lazyterm",
+          },
+        },
+      })
     end
   },
   {
@@ -54,6 +70,9 @@ return {
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         ['<leader>u'] = { name = '[U]other?', _ = 'which_key_ignore' },
+        ['<leader>n'] = { name = '[N]oice', _ = 'which_key_ignore'},
+        ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore'},
+        ['<leader>gh'] = { name = '[G]it [H]unk', _ = 'which_key_ignore'},
       }
     end,
     opts = {
@@ -61,23 +80,6 @@ return {
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     }
-  },
-    -- Here is a more advanced example where we pass configuration
-  -- options to `gitsigns.nvim`. This is equivalent to the following lua:
-  --    require('gitsigns').setup({ ... })
-  --
-  -- See `:help gitsigns` to understand what the configuration keys do
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
   },
   --[[   { -- Autoformat
     'stevearc/conform.nvim',
@@ -106,12 +108,17 @@ return {
   },
   {
     'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
       options = {
-        icons_enabled = false,
-        theme = 'auto',
-        component_separators = '|',
-        section_separators = '',
+        icons_enabled = true,
+        theme = 'tokyonight',
+        -- component_separators = '|',
+        -- section_separators = '',
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
+        globalstatus = true,
+        disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
       },
     },
   },
@@ -165,6 +172,16 @@ return {
         }
       })
 
+      require("mini.indentscope").setup({
+        options = {
+          try_as_border = true,
+        },
+        symbol = "│",
+        draw = {
+          animation = require('mini.indentscope').gen_animation.none()
+        }
+      })
+
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
@@ -173,15 +190,27 @@ return {
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
-  },
-  {
-    'jinh0/eyeliner.nvim',
-    config = function ()
-      require('eyeliner').setup {
-        highlight_on_key = true,
-        dim = false,
-      }
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "help",
+          "alpha",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toggleterm",
+          "lazyterm",
+        },
+        callback = function()
+          ---@diagnostic disable-next-line inject-field
+          vim.b.miniindentscope_disable = true
+        end,
+      })
     end,
-  }
+  },
 }
 
