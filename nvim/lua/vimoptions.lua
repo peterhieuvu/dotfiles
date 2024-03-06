@@ -1,7 +1,7 @@
 -- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
 
--- Set highlight on search
--- vim.opt.hlsearch = false
+-- enable hover
+vim.opt.mousemoveevent = true
 
 -- Line numbers default
 vim.opt.number = true

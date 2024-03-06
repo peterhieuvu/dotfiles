@@ -74,27 +74,39 @@ return {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
       { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
-      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete buffers to the right" },
-      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete buffers to the left" },
+      { "<leader>bqr", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete buffers to the right" },
+      { "<leader>bql", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete buffers to the left" },
       { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
       { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
-      { "<leader>bmh", "<cmd>BufferLineMovePrev<cr>", desc = "Next buffer" },
-      { "<leader>bml", "<cmd>BufferLineMoveNext<cr>", desc = "Next buffer" },
+      { "<leader>bh", "<cmd>BufferLineMovePrev<cr>", desc = "Move prev buffer" },
+      { "<leader>bl", "<cmd>BufferLineMoveNext<cr>", desc = "Move next buffer" },
     },
     opts = {
       options = {
-        -- stylua: ignore
         close_command = function(n) require("mini.bufremove").delete(n, false) end,
-        -- stylua: ignore
         right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
         diagnostics = "nvim_lsp",
-        always_show_bufferline = false,
+        diagnostics_indicator = function(_, _, diagnostics_dict, _)
+          local s = " "
+          for e, n in pairs(diagnostics_dict) do
+            local sym = e == "error" and " "
+              or (e == "warning" and " " or "" )
+            s = s .. n .. sym
+          end
+          return s
+        end,
+        always_show_bufferline = true,
+        hover = {
+          enabled = true,
+          delay = 100,
+          reveal = { "close" },
+        },
         offsets = {
           {
             filetype = "neo-tree",
             text = "Neo-tree",
             highlight = "Directory",
-            text_align = "left",
+            text_align = "center",
           },
         },
       },

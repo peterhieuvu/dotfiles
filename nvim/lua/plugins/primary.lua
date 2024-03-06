@@ -1,4 +1,43 @@
 return {
+  {
+    "folke/trouble.nvim",
+    cmd = { "TroubleToggle", "Trouble" },
+    opts = { use_diagnostic_signs = true },
+    keys = {
+      { "<leader>tx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+      { "<leader>tX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+      { "<leader>tL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
+      { "<leader>tQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+      {
+        "[q",
+        function()
+          if require("trouble").is_open() then
+            require("trouble").previous({ skip_groups = true, jump = true })
+          else
+            local ok, err = pcall(vim.cmd.cprev)
+            if not ok then
+              vim.notify(err, vim.log.levels.ERROR)
+            end
+          end
+        end,
+        desc = "Previous trouble/quickfix item",
+      },
+      {
+        "]q",
+        function()
+          if require("trouble").is_open() then
+            require("trouble").next({ skip_groups = true, jump = true })
+          else
+            local ok, err = pcall(vim.cmd.cnext)
+            if not ok then
+              vim.notify(err, vim.log.levels.ERROR)
+            end
+          end
+        end,
+        desc = "Next trouble/quickfix item",
+      },
+    },
+  },
   { 'norcalli/nvim-colorizer.lua',
     config = function ()
       require('colorizer').setup()
@@ -10,30 +49,6 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     config = function ()
-      local highlight = {
-          "RainbowRed",
-          "RainbowYellow",
-          "RainbowBlue",
-          "RainbowOrange",
-          "RainbowGreen",
-          "RainbowViolet",
-          "RainbowCyan",
-      }
-
-      local hooks = require "ibl.hooks"
-      -- create the highlight groups in the highlight setup hook, so they are reset
-      -- every time the colorscheme changes
-      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-          vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#9C7E81" })
-          vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#BBAF98" })
-          vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#99A5AF" })
-          vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#B1A08F" })
-          vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#ADB9A5" })
-          vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#988C9B" })
-          vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#92A7AA" })
-      end)
-
-      -- require("ibl").setup { indent = { highlight = highlight } }
       require("ibl").setup({
         scope = { enabled = false },
         exclude = {
@@ -106,22 +121,6 @@ return {
     priority = 1000, -- load this before all others
     opts = {},
   },
-  {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = {
-      options = {
-        icons_enabled = true,
-        theme = 'tokyonight',
-        -- component_separators = '|',
-        -- section_separators = '',
-        component_separators = { left = '', right = ''},
-        section_separators = { left = '', right = ''},
-        globalstatus = true,
-        disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
-      },
-    },
-  },
   { 'numToStr/Comment.nvim', lazy = false, opts = {} },
   -- Highlight todo, notes, etc in comments
   {'folke/todo-comments.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = true }},
@@ -131,8 +130,47 @@ return {
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "help",
+          "alpha",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toggleterm",
+          "lazyterm",
+        },
+        callback = function()
+          ---@diagnostic disable-next-line inject-field
+          vim.b.miniindentscope_disable = true
+        end,
+      })
+    end,
     config = function()
       require('mini.cursorword').setup()
+      require("mini.bufremove").setup()
+
+      vim.keymap.set("n", "<leader>bd",
+        function()
+          local bd = require("mini.bufremove").delete
+          if vim.bo.modified then
+            local choice = vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname()), "&Yes\n&No\n&Cancel")
+            if choice == 1 then -- Yes
+              vim.cmd.write()
+              bd(0)
+            elseif choice == 2 then -- No
+              bd(0, true)
+            end
+          else
+            bd(0)
+          end
+        end, { desc = "Delete Buffer" })
+      vim.keymap.set("n", "<leader>bD", function() require("mini.bufremove").delete(0, true) end, { desc = "Delete Buffer (Force)" })
       -- Better Around/Inside textobjects
       --
       -- Examples:
@@ -189,27 +227,6 @@ return {
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
-    end,
-    init = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = {
-          "help",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "trouble",
-          "lazy",
-          "mason",
-          "notify",
-          "toggleterm",
-          "lazyterm",
-        },
-        callback = function()
-          ---@diagnostic disable-next-line inject-field
-          vim.b.miniindentscope_disable = true
-        end,
-      })
     end,
   },
 }
