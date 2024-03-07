@@ -5,6 +5,7 @@ return {
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'flash',
       { -- If encountering errors, see telescope-fzf-native README for install instructions
         'nvim-telescope/telescope-fzf-native.nvim',
 
@@ -26,6 +27,26 @@ return {
       { 'nvim-tree/nvim-web-devicons' }
     },
     config = function()
+
+      local function flash(prompt_bufnr)
+        require("flash").jump({
+          pattern = "^",
+          label = { after = { 0, 0 } },
+          search = {
+            mode = "search",
+            exclude = {
+              function(win)
+                return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "TelescopeResults"
+              end,
+            },
+          },
+          action = function(match)
+            local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+            picker:set_selection(match.pos[1] - 1)
+          end,
+        })
+      end
+
       -- Telescope is a fuzzy finder that comes with a lot of different things that
       -- it can fuzzy find! It's more than just a "file finder", it can search
       -- many different aspects of Neovim, your workspace, LSP, and more!
@@ -57,6 +78,12 @@ return {
         --   },
         -- },
         -- pickers = {}
+        defaults = {
+          mappings = {
+            n = { s = flash },
+            i = { ["<c-s>"] = flash }
+          },
+        },
         extensions = {
           -- ['ui-select'] = {
           --   require('telescope.themes').get_dropdown(),

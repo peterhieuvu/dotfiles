@@ -1,4 +1,15 @@
 return {
+  --   -- search/replace in multiple files
+  -- {
+  --   "nvim-pack/nvim-spectre",
+  --   build = false,
+  --   cmd = "Spectre",
+  --   opts = { open_cmd = "noswapfile vnew" },
+  --   -- stylua: ignore
+  --   keys = {
+  --     { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+  --   },
+  -- },
   {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
@@ -30,6 +41,7 @@ return {
           else
             local ok, err = pcall(vim.cmd.cnext)
             if not ok then
+              ---@diagnostic disable-next-line
               vim.notify(err, vim.log.levels.ERROR)
             end
           end
@@ -125,7 +137,69 @@ return {
     priority = 1000, -- load this before all others
     opts = {},
   },
-  { 'numToStr/Comment.nvim', lazy = false, opts = {} },
+  {
+    "catppuccin/nvim",
+    lazy = false,
+    priority = 1000,
+    name = "catppuccin",
+    opts = {
+      flavour = "macchiato",
+      show_end_of_buffer = true,
+      integrations = {
+        aerial = true,
+        alpha = true,
+        cmp = true,
+        dashboard = true,
+        flash = true,
+        gitsigns = true,
+        headlines = true,
+        illuminate = true,
+        indent_blankline = { enabled = true },
+        leap = true,
+        lsp_trouble = true,
+        mason = true,
+        markdown = true,
+        mini = true,
+        native_lsp = {
+          enabled = true,
+          underlines = {
+            errors = { "undercurl" },
+            hints = { "undercurl" },
+            warnings = { "undercurl" },
+            information = { "undercurl" },
+          },
+        },
+        navic = { enabled = true, custom_bg = "lualine" },
+        neotest = true,
+        neotree = true,
+        noice = true,
+        notify = true,
+        semantic_tokens = true,
+        telescope = true,
+        treesitter = true,
+        treesitter_context = true,
+        which_key = true,
+      },
+    },
+  },
+   -- comments
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    lazy = true,
+    opts = {
+      enable_autocmd = false,
+    },
+  },
+  {
+    'numToStr/Comment.nvim',
+    lazy = false,
+    config = function ()
+      ---@diagnostic disable-next-line missing-fieldss
+      require('Comment').setup({
+        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+      })
+    end,
+  },
   -- Highlight todo, notes, etc in comments
   {'folke/todo-comments.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = true }},
 
@@ -181,14 +255,24 @@ return {
       --  - va)  - [V]isually select [A]round [)]parenthen
       --  - yinq - [Y]ank [I]nside [N]ext [']quote
       --  - ci'  - [C]hange [I]nside [']quote
-      --require('mini.ai').setup { n_lines = 500 }
+      require('mini.ai').setup { n_lines = 500 }
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      require('mini.surround').setup({
+        mappings = {
+          add = "gsa", -- Add surrounding in Normal and Visual modes
+          delete = "gsd", -- Delete surrounding
+          find = "gsf", -- Find surrounding (to the right)
+          find_left = "gsF", -- Find surrounding (to the left)
+          highlight = "gsh", -- Highlight surrounding
+          replace = "gsr", -- Replace surrounding
+          update_n_lines = "gsn", -- Update `n_lines`
+        },
+      })
 
 
       -- Split and join lists from one line to multi line

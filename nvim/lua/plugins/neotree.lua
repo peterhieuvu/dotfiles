@@ -39,7 +39,13 @@ return {
         {text = "󰌵", texthl = "DiagnosticSignHint"})
 
       require("neo-tree").setup({
-        popup_border_style = "rounded"
+        popup_border_style = "rounded",
+        source_selector = {
+          winbar = true
+        },
+        sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+        open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
+
       })
     end,
     keys = {

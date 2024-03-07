@@ -22,6 +22,14 @@ return {
       -- Snippet Engine & its associated nvim-cmp source
       {
         'L3MON4D3/LuaSnip',
+        dependencies = {
+          {
+            "rafamadriz/friendly-snippets",
+            config = function ()
+              require("luasnip.loaders.from_vscode").lazy_load()
+            end,
+          },
+        },
         build = (function()
           -- Build Step is needed for regex support in snippets
           -- This step is not supported in many windows environments
@@ -39,7 +47,7 @@ return {
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
-      -- TODO: cmp-buffer (lazyvim)
+      'hrsh7th/cmp-buffer',
 
       -- If you want to add a bunch of pre-configured snippets,
       --    you can use this plugin to help you. It even has snippets
@@ -70,6 +78,8 @@ return {
           ['<C-j>'] = cmp.mapping.select_next_item(),
           -- Select the [p]revious item
           ['<C-k>'] = cmp.mapping.select_prev_item(),
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
 
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
@@ -102,11 +112,16 @@ return {
             end
           end, { 'i', 's' }),
         },
-        sources = {
+        sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
-        },
+        }, {
+          { name = 'buffer' },
+        }),
+        experimental = {
+          ghost_text = true,
+        }
       }
     end,
   }
