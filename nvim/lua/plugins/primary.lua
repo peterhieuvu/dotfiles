@@ -38,9 +38,13 @@ return {
       },
     },
   },
-  { 'norcalli/nvim-colorizer.lua',
+  { 'NvChad/nvim-colorizer.lua',
     config = function ()
-      require('colorizer').setup()
+      require('colorizer').setup({
+        user_default_options = {
+          mode = "virtualtext" -- background, foreground
+        }
+      })
       vim.cmd[[ColorizerAttachToBuffer]]
     end
   }, -- adding color highlighter to css colors

@@ -12,10 +12,8 @@ This is a personal dotfiles repo
 5. Vim sleuth
 7. Transparency?
 10. https://github.com/wfxr/minimap.vim
-11. Bufferline (bufferline, barbar, heirline)
 12. Toggleterm?
 13. Navigation (harpoon, leap, flash, vim-sneak)
-14. https://github.com/sindrets/diffview.nvim
 15. https://github.com/ThePrimeagen/refactoring.nvim
 16. https://github.com/epwalsh/obsidian.nvim
 18. Snippets check?
@@ -27,3 +25,8 @@ This is a personal dotfiles repo
 25. neoconf
 27. lsp rename
 28. cmp documentation non-block comments
+29. lsp navigation, quick fixes
+30. folds
+31. Learn how to use troube
+32. Set up :TodoQuickfix
+
