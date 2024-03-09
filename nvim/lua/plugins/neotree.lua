@@ -78,7 +78,7 @@ return {
         desc = "Show floating file e[X]plorer"
       },
       {
-        "<leader>b",
+        "<leader>bb",
         function ()
           require("neo-tree.command").execute({ toggle = true, action = "show", source = "buffers", position = "right" })
         end,

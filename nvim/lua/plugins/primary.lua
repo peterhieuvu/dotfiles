@@ -95,15 +95,30 @@ return {
 
       -- Document existing key chains
       require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        ['<leader>u'] = { name = '[U]other?', _ = 'which_key_ignore' },
-        ['<leader>n'] = { name = '[N]oice', _ = 'which_key_ignore'},
-        ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore'},
-        ['<leader>gh'] = { name = '[G]it [H]unk', _ = 'which_key_ignore'},
+        ["g"] = { name = "+[g]oto" },
+        ["gs"] = { name = "+[s]urround" },
+        ["]"] = { name = "+[n]ext" },
+        ["["] = { name = "+[p]rev" },
+        ["<leader><tab>"] = { name = "+[t]abs" },
+        ["<leader>b"] = { name = "+[b]uffer" },
+        ["<leader>c"] = { name = "+[c]ode" },
+        -- ["<leader>f"] = { name = "+[f]ile/find" },
+        ["<leader>g"] = { name = "+[g]it" },
+        ["<leader>gh"] = { name = "+[g]it [h]unks" },
+        ["<leader>q"] = { name = "+[q]uit/session" },
+        ["<leader>s"] = { name = "+[s]earch" },
+        ["<leader>u"] = { name = "+[u]i" },
+        ["<leader>w"] = { name = "+[w]indows/workspace" },
+        ["<leader>t"] = { name = "+[t]rouble/diagnostics/quickfix" },
+
+        -- ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+        ['<leader>d'] = { name = '[d]ocument', _ = 'which_key_ignore' },
+        ['<leader>r'] = { name = '[r]ename', _ = 'which_key_ignore' },
+        -- ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+        -- ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+        ['<leader>n'] = { name = '[n]oice', _ = 'which_key_ignore'},
+        -- ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore'},
+        -- ['<leader>gh'] = { name = '[G]it [H]unk', _ = 'which_key_ignore'},
       }
     end,
     opts = {
@@ -201,7 +216,20 @@ return {
     end,
   },
   -- Highlight todo, notes, etc in comments
-  {'folke/todo-comments.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = true }},
+  {
+    'folke/todo-comments.nvim',
+    cmd = { "TodoTrouble", "TodoTelescope" },
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = { signs = true },
+    keys = {
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+      { "<leader>tt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
+      { "<leader>tT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
+      { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
+      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
+    }
+  },
 
   -- TODO: conform.nvim?
   -- TODO: vim-sleuth?

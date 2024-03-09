@@ -29,4 +29,7 @@ This is a personal dotfiles repo
 30. folds
 31. Learn how to use troube
 32. Set up :TodoQuickfix
+33. change neotree keybinds
+34. change lsp keybinds
+35. check trouble/quickfix keymaps
 
