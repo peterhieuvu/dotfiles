@@ -1,4 +1,27 @@
 return {
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = {
+      "kevinhwang91/promise-async"
+    },
+    config = function ()
+      -- folding
+      vim.opt.foldlevel = 99
+      vim.opt.foldlevelstart = 99
+      vim.opt.foldcolumn = '0'
+      vim.opt.foldenable = true
+
+      -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+      vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+      vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+
+      require('ufo').setup({
+        provider_selector = function(bufnr, filetype, buftype)
+          return { 'treesitter', 'indent' }
+        end
+      })
+    end
+  },
   --   -- search/replace in multiple files
   -- {
   --   "nvim-pack/nvim-spectre",
@@ -101,7 +124,7 @@ return {
         ["["] = { name = "+[p]rev" },
         ["<leader><tab>"] = { name = "+[t]abs" },
         ["<leader>b"] = { name = "+[b]uffer" },
-        ["<leader>c"] = { name = "+[c]ode" },
+        ["<leader>c"] = { name = "+[c]ode", _ = 'which_key_ignore' },
         -- ["<leader>f"] = { name = "+[f]ile/find" },
         ["<leader>g"] = { name = "+[g]it" },
         ["<leader>gh"] = { name = "+[g]it [h]unks" },
@@ -111,7 +134,6 @@ return {
         ["<leader>w"] = { name = "+[w]indows/workspace" },
         ["<leader>t"] = { name = "+[t]rouble/diagnostics/quickfix" },
 
-        -- ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = '[d]ocument', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = '[r]ename', _ = 'which_key_ignore' },
         -- ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
@@ -307,7 +329,11 @@ return {
       --
       -- Examples:
       --  - gS - toggle
-      require('mini.splitjoin').setup()
+      require('mini.splitjoin').setup({
+        mappings = {
+          toggle = '<leader>cs'
+        }
+      })
 
       -- NOTE: consider:
       -- require('mini.pairs').setup()

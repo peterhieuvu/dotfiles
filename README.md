@@ -8,7 +8,6 @@ This is a personal dotfiles repo
 
 ## Next steps
 1. Git helpers (git diff helper)
-3. Atom one theme, catppuccin
 5. Vim sleuth
 7. Transparency?
 10. https://github.com/wfxr/minimap.vim
@@ -17,19 +16,13 @@ This is a personal dotfiles repo
 15. https://github.com/ThePrimeagen/refactoring.nvim
 16. https://github.com/epwalsh/obsidian.nvim
 18. Snippets check?
-19. https://github.com/JoosepAlviste/nvim-ts-context-commentstring
 20. https://github.com/nvim-pack/nvim-spectre
-21. https://github.com/RRethy/vim-illuminate
 23. conform
 24. nvim lint
 25. neoconf
-27. lsp rename
 28. cmp documentation non-block comments
-29. lsp navigation, quick fixes
 30. folds
-31. Learn how to use troube
-32. Set up :TodoQuickfix
+31. https://www.reddit.com/r/neovim/comments/10bmy9w/lets_see_your_status_columns/
 33. change neotree keybinds
-34. change lsp keybinds
-35. check trouble/quickfix keymaps
+34. check lsp buf hover with cmp hover
 
