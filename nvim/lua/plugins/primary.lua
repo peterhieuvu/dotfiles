@@ -254,7 +254,7 @@ return {
   },
 
   -- TODO: conform.nvim?
-  -- TODO: vim-sleuth?
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
