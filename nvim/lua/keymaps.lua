@@ -5,7 +5,7 @@ vim.g.maplocalleader = ' '
 
 -- highlight on search, but clear on escape in normal mode
 vim.opt.hlsearch = true
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR> <bar> <cmd>lua require("mini.map").refresh()<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })

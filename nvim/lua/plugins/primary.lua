@@ -283,6 +283,37 @@ return {
       require('mini.cursorword').setup()
       require("mini.bufremove").setup()
 
+      local MiniMap = require('mini.map')
+      MiniMap.setup({
+        integrations = {
+          require('mini.map').gen_integration.diagnostic({
+            error = 'DiagnosticFloatingError',
+            warn  = 'DiagnosticFloatingWarn',
+            info  = 'DiagnosticFloatingInfo',
+            hint  = 'DiagnosticFloatingHint',
+          }),
+          require('mini.map').gen_integration.builtin_search()
+        },
+        window = {
+          width = 10,
+          zindex = 21,
+          show_integration_count = false
+        }
+      })
+      vim.keymap.set('n', '<Leader>mc', MiniMap.close)
+      vim.keymap.set('n', '<Leader>mf', MiniMap.toggle_focus)
+      vim.keymap.set('n', '<Leader>mo', MiniMap.open)
+      vim.keymap.set('n', '<Leader>mr', MiniMap.refresh)
+      vim.keymap.set('n', '<Leader>ms', MiniMap.toggle_side)
+      vim.keymap.set('n', '<Leader>mt', MiniMap.toggle)
+      vim.api.nvim_create_autocmd('TabEnter', {
+        desc = 'Testing',
+        callback = function()
+          require('mini.map').open()
+        end,
+      })
+
+
       vim.keymap.set("n", "<leader>bd",
         function()
           local bd = require("mini.bufremove").delete
