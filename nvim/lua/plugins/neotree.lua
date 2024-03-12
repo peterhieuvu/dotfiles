@@ -66,7 +66,7 @@ return {
       {
         "<C-\\>",
         function ()
-          require("neo-tree.command").execute({ position = "current", reveal_force_cwd = true })
+          require("neo-tree.command").execute({ toggle = true, position = "current", reveal_force_cwd = true })
         end,
         desc = "Toggle tree in current window"
       },
