@@ -22,12 +22,6 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- Keybinds to make insert navigation easier
-vim.keymap.set('i', '<M-h>', '<Left>', { desc = 'Move left during insert mode'})
-vim.keymap.set('i', '<M-l>', '<Right>', { desc = 'Move right during insert mode'})
-vim.keymap.set('i', '<M-j>', '<Down>', { desc = 'Move down during insert mode'})
-vim.keymap.set('i', '<M-k>', '<Up>', { desc = 'Move up during insert mode'})
-
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -48,4 +42,11 @@ vim.keymap.set("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" 
 vim.keymap.set("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 vim.keymap.set("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+-- [[INSERT MODE KEYBINDINGS]]
+-- Keybinds to make insert navigation easier
+vim.keymap.set('i', '<M-h>', '<Left>', { desc = 'Move left during insert mode'})
+vim.keymap.set('i', '<M-l>', '<Right>', { desc = 'Move right during insert mode'})
+vim.keymap.set('i', '<M-j>', '<Down>', { desc = 'Move down during insert mode'})
+vim.keymap.set('i', '<M-k>', '<Up>', { desc = 'Move up during insert mode'})
 
