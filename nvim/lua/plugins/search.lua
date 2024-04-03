@@ -100,6 +100,11 @@ return {
           --   require('telescope.themes').get_dropdown(),
           -- },
         },
+        pickers = {
+          lsp_references = {
+            show_line = false
+          }
+        }
       }
 
       -- Enable telescope extensions, if they are installed

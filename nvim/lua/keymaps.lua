@@ -43,6 +43,9 @@ vim.keymap.set("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 vim.keymap.set("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
+-- relative number toggle
+vim.keymap.set('n', '<leader>vl', '<cmd>set rnu!<CR>', { desc = "Toggle relative line numbers" })
+
 -- [[INSERT MODE KEYBINDINGS]]
 -- Keybinds to make insert navigation easier
 vim.keymap.set('i', '<M-h>', '<Left>', { desc = 'Move left during insert mode'})
