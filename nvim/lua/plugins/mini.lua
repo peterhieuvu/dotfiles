@@ -37,6 +37,9 @@ return {
           }),
           require('mini.map').gen_integration.builtin_search()
         },
+        symbols = {
+          encode = MiniMap.gen_encode_symbols.block('2x2')
+        },
         window = {
           width = 10,
           zindex = 21,

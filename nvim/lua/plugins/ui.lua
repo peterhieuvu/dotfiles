@@ -207,8 +207,33 @@ return {
     event = "VimEnter",
     dependencies = { {'nvim-tree/nvim-web-devicons'} },
     opts = function()
+      -- local opts = {
+      --   theme = "doom",
+      --   hide = {
+      --     -- this is taken care of by lualine
+      --     -- enabling this messes up the actual laststatus setting after loading a file
+      --     statusline = false,
+      --   },
+      --   config = {
+      --     -- stylua: ignore
+      --     center = {
+      --       { action = "Telescope find_files",                                     desc = " Find file",       icon = " ", key = "f" },
+      --       { action = "ene | startinsert",                                        desc = " New file",        icon = " ", key = "n" },
+      --       { action = "Telescope oldfiles",                                       desc = " Recent files",    icon = " ", key = "r" },
+      --       { action = "Telescope live_grep",                                      desc = " Find text",       icon = " ", key = "g" },
+      --       { action = 'lua require("persistence").load()',                        desc = " Restore Session", icon = " ", key = "s" },
+      --       { action = "Lazy",                                                     desc = " Lazy",            icon = "󰒲 ", key = "l" },
+      --       { action = "qa",                                                       desc = " Quit",            icon = " ", key = "q" },
+      --     },
+      --     footer = function()
+      --       local stats = require("lazy").stats()
+      --       local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+      --       return { "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms" }
+      --     end,
+      --   },
+      -- }
       local opts = {
-        theme = "doom",
+        theme = "hyper",
         hide = {
           -- this is taken care of by lualine
           -- enabling this messes up the actual laststatus setting after loading a file
@@ -216,7 +241,7 @@ return {
         },
         config = {
           -- stylua: ignore
-          center = {
+          shortcut = {
             { action = "Telescope find_files",                                     desc = " Find file",       icon = " ", key = "f" },
             { action = "ene | startinsert",                                        desc = " New file",        icon = " ", key = "n" },
             { action = "Telescope oldfiles",                                       desc = " Recent files",    icon = " ", key = "r" },
@@ -225,6 +250,19 @@ return {
             { action = "Lazy",                                                     desc = " Lazy",            icon = "󰒲 ", key = "l" },
             { action = "qa",                                                       desc = " Quit",            icon = " ", key = "q" },
           },
+          -- limit how many projects list, action when you press key or enter it will run this action.
+          -- action can be a functino type, e.g.
+          -- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
+          project = {
+            enable = true,
+            limit = 8,
+            action = function (path)
+              vim.cmd('cd ' .. path)
+              require('persistence').load()
+              -- vim.cmd('Telescope find_files cwd=' .. path)
+            end
+          },
+          -- mru = { limit = 10, icon = 'your icon', label = '', cwd_only = false },
           footer = function()
             local stats = require("lazy").stats()
             local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
@@ -233,10 +271,10 @@ return {
         },
       }
 
-      for _, button in ipairs(opts.config.center) do
-        button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
-        button.key_format = "  %s"
-      end
+      -- for _, button in ipairs(opts.config.center) do
+      --   button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
+      --   button.key_format = "  %s"
+      -- end
 
       -- close Lazy and re-open when the dashboard is ready
       if vim.o.filetype == "lazy" then
