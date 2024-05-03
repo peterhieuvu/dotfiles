@@ -13,12 +13,6 @@ alias cdd="cd ~/Documents"
 
 # The following lines were added by compinstall
 
-zstyle ':completion:*' completer _complete _ignored
-zstyle :compinstall filename '/home/hieuy/.zshrc'
-
-autoload -Uz compinit promptinit
-compinit
-promptinit
 # End of lines added by compinstall
 
 source ~/powerlevel10k/powerlevel10k.zsh-theme

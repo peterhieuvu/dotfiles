@@ -1,5 +1,47 @@
 -- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
 
+vim.api.nvim_create_user_command('DbProjectAdd', function ()
+  local uv = vim.uv
+  local dir = vim.fn.stdpath('cache') .. '/dashboard'
+  if vim.fn.isdirectory(dir) == 0 then
+    vim.fn.mkdir(dir, 'p')
+  end
+  local path = dir .. '/cache'
+  local projects = { vim.fn.getcwd() }
+  -- callback hell holy shit but simply than write a async await lib
+  -- also I don't link to add a thirdpart plugin. this is just a small code
+  uv.fs_open(path, 'r+', 384,
+    function(err, fd)
+      assert(not err, err)
+      assert(fd, 'no file descriptor when opening')
+      uv.fs_fstat(fd, function(errStat, stat)
+        assert(not errStat, errStat)
+        assert(stat, 'no stat')
+        uv.fs_read(fd, stat.size, 0, function(errData, data)
+          assert(not errData, errData)
+          assert(data, 'no data')
+          local before = assert(loadstring(data))
+          local plist = before()
+          if plist and #plist > 10 then
+            plist = vim.list_slice(plist, 10)
+          end
+          plist = vim.tbl_filter(function(k)
+            return not vim.tbl_contains(projects, k)
+          end, plist or {})
+          plist = vim.list_extend(plist, projects)
+          local dump = 'return ' .. vim.inspect(plist)
+          uv.fs_write(fd, dump, 0, function(errWrite, _)
+            assert(not errWrite, errWrite)
+            uv.fs_ftruncate(fd, #dump, function(errDump, _)
+              assert(not errDump, errDump)
+              uv.fs_close(fd)
+            end)
+          end)
+        end)
+      end)
+    end)
+end, {})
+
 -- enable hover
 vim.opt.mousemoveevent = true
 
