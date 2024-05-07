@@ -170,6 +170,14 @@ return {
       vim.keymap.set('n', '<leader>sC', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch neovim [C]onfig files' })
+
+      local toggleterm_picker = require('plugins.telescope-custom.toggleterm-picker').open
+      vim.keymap.set('n', '<leader>st', function ()
+          toggleterm_picker(require('telescope.themes').get_dropdown({
+            winblend = 10,
+          }))
+        end,
+        { desc = '[s]earch [t]terminals' })
     end,
   }
 }
