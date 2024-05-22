@@ -12,7 +12,12 @@ return {
       require('nvim-treesitter.configs').setup {
         ensure_installed = {
           'bash',
-          'vim',
+          'css',
+          'git_rebase',
+          'gitcommit',
+          'gitignore',
+          'json',
+          'jsonc',
           'lua',
           'regex',
           'markdown',
@@ -23,7 +28,9 @@ return {
           'tsx',
           'scss',
           'python',
-          'latex'
+          -- 'latex',
+          -- 'vim',
+          -- 'vimdoc',
         },
         auto_install = true,
         highlight = { enable = true },
