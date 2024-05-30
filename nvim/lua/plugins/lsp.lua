@@ -13,6 +13,7 @@ return {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
+      'b0o/schemastore.nvim',
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -161,7 +162,22 @@ return {
         -- But for many setups, the LSP (`tsserver`) will work just fine
         tsserver = {},
         --
-        jsonls = {},
+        jsonls = {
+          settings = {
+            json = {
+              schemas = require('schemastore').json.schemas {
+                select = {
+                  '.eslintrc',
+                  'package.json',
+                  'tsconfig.json',
+                  'prettierrc.json',
+                  'lerna.json'
+                },
+              },
+              validate = { enable = true },
+            }
+          }
+        },
 
         lua_ls = {
           -- cmd = {...},

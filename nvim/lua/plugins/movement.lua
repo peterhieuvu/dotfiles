@@ -24,7 +24,6 @@ return {
       },
       highlight = {
         backdrop = false,
-        matches = false,
       }
     },
     -- stylua: ignore

@@ -63,13 +63,13 @@ return {
         end,
         desc = "Toggle tree in sidebar"
       },
-      {
-        "<C-\\>",
-        function ()
-          require("neo-tree.command").execute({ toggle = true, position = "current", reveal_force_cwd = true })
-        end,
-        desc = "Toggle tree in current window"
-      },
+      -- {
+      --   "<C-\\>",
+      --   function ()
+      --     require("neo-tree.command").execute({ toggle = true, position = "current", reveal_force_cwd = true })
+      --   end,
+      --   desc = "Toggle tree in current window"
+      -- },
       {
         "<leader>x",
         function ()

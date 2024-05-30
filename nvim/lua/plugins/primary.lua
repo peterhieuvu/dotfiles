@@ -1,6 +1,14 @@
 return {
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    opts = {
+      open_mapping = [[<c-\>]],
+      direction = 'float'
+    }
+  },
+  {
     "kevinhwang91/nvim-ufo",
     dependencies = {
       "kevinhwang91/promise-async"

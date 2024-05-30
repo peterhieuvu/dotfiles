@@ -48,8 +48,15 @@ vim.keymap.set('n', '<leader>vl', '<cmd>set rnu!<CR>', { desc = "Toggle relative
 
 -- [[INSERT MODE KEYBINDINGS]]
 -- Keybinds to make insert navigation easier
-vim.keymap.set('i', '<M-h>', '<Left>', { desc = 'Move left during insert mode'})
-vim.keymap.set('i', '<M-l>', '<Right>', { desc = 'Move right during insert mode'})
-vim.keymap.set('i', '<M-j>', '<Down>', { desc = 'Move down during insert mode'})
-vim.keymap.set('i', '<M-k>', '<Up>', { desc = 'Move up during insert mode'})
+-- vim.keymap.set('i', '<M-h>', '<Left>', { desc = 'Move left during insert mode'})
+-- vim.keymap.set('i', '<M-l>', '<Right>', { desc = 'Move right during insert mode'})
+-- vim.keymap.set('i', '<M-j>', '<Down>', { desc = 'Move down during insert mode'})
+-- vim.keymap.set('i', '<M-k>', '<Up>', { desc = 'Move up during insert mode'})
+
+vim.keymap.set("n", "<M-j>", ":m .+1<CR>==") -- move line up(n)
+vim.keymap.set("n", "<M-k>", ":m .-2<CR>==") -- move line down(n)
+vim.keymap.set("i", "<M-j>", "<Esc>:m .+1<CR>==gi") -- move line up(n)
+vim.keymap.set("i", "<M-k>", "<Esc>:m .-2<CR>==gi") -- move line down(n)
+vim.keymap.set("v", "<M-j>", ":m '>+1<CR>gv=gv") -- move line up(v)
+vim.keymap.set("v", "<M-k>", ":m '<-2<CR>gv=gv") -- move line down(v)
 
