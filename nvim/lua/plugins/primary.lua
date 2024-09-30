@@ -75,7 +75,8 @@ return {
     config = function ()
       require('colorizer').setup({
         user_default_options = {
-          mode = "virtualtext" -- background, foreground
+          mode = "virtualtext", -- background, foreground
+          names = false,
         }
       })
       vim.cmd[[ColorizerAttachToBuffer]]

@@ -55,10 +55,31 @@ vim.opt.mouse = 'a'
 -- Don't show the mode since it's already in status line
 vim.opt.showmode = false
 
+-- vim.o.clipboard = "unnamedplus"
+-- Below section is clipboard utilizing OSC 52 for copying to clipboard
+
+local function paste()
+  return {
+    vim.fn.split(vim.fn.getreg(""), "\n"),
+    vim.fn.getregtype(""),
+  }
+end
+
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = 'unnamedplus'
+-- vim.opt.clipboard = 'osc52'
+vim.g.clipboard = {
+  name = 'OSC 52',
+  copy = {
+    ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+    ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+  },
+  paste = {
+    ['+'] = paste,
+    ['*'] = paste,
+  },
+}
 
 -- Continue indents with line breaks
 vim.opt.breakindent = true

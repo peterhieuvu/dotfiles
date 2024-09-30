@@ -14,12 +14,22 @@ return {
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'b0o/schemastore.nvim',
+      'mfussenegger/nvim-jdtls',
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {}, enabled = false },
     },
     config = function()
+      local function contains(table, value)
+        for _, table_value in ipairs(table) do
+          if table_value == value then
+            return true
+          end
+        end
+
+        return false
+      end
       -- Brief Aside: **What is LSP?**
       --
       -- LSP is an acronym you've probably heard, but might not understand what it is.
@@ -161,7 +171,6 @@ return {
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
         tsserver = {},
-        jdtls = {},
         --
         jsonls = {
           settings = {
@@ -234,7 +243,36 @@ return {
               capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {}),
             }
           end,
-        },
+          jdtls = function()
+            require("lspconfig").jdtls.setup({
+              on_attach = function()
+                local bemol_dir = vim.fs.find({ ".bemol" }, { upward = true, type = "directory" })[1]
+                local ws_folders_lsp = {}
+                if bemol_dir then
+                  local folders = vim.lsp.buf.list_workspace_folders()
+                  local file = io.open(bemol_dir .. "/ws_root_folders", "r")
+                  if file then
+                    for line in file:lines() do
+                      table.insert(ws_folders_lsp, line)
+                    end
+                    file:close()
+                  end
+                end
+                for _, line in ipairs(ws_folders_lsp) do
+                  if not contains(ws_folders_lsp, line) then
+                    vim.lsp.buf.add_workspace_folder(line)
+                  end
+                end
+              end,
+              cmd = {
+                "jdtls",
+                "--jvm-arg=-javaagent:" .. require("mason-registry")
+                  .get_package("jdtls")
+                  :get_install_path() .. "/lombok.jar",
+              },
+            })
+          end
+        }
       }
     end,
   },
