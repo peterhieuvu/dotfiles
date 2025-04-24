@@ -6,6 +6,17 @@ This is a personal dotfiles repo
 
     ln -s dotfiles/nvim ~/.config/nvim
 
+## Dependencies
+1. powerlevel10k (optional)
+2. neovim
+3. lsd
+4. zoxide (optional)
+5. vs code (optional)
+6. fzf
+7. ripgrep
+8. tldr (optional)
+9. fd
+
 ## Next steps
 1. Git helpers (git diff helper)
 7. Transparency?
