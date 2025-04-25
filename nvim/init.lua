@@ -15,6 +15,17 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins")
+local enabled = require("vscodeenabled")
 
-vim.cmd[[colorscheme catppuccin]]
+require("lazy").setup("plugins", {
+  defaults = {
+    -- by default, use the enabled list to restrict plugin loading if we are in vs code
+    cond = vim.g.vscode and function(plugin)
+      return vim.tbl_contains(enabled, plugin.name)
+    end or nil,  
+  }
+})
+
+if not vim.g.vscode then
+  vim.cmd[[colorscheme catppuccin]]
+end
