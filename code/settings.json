@@ -1,7 +1,7 @@
 {
-    "telemetry.telemetryLevel": "error",
+    "telemetry.telemetryLevel": "off",
     "telemetry.feedback.enabled": false,
-    "editor.fontFamily": "MesloLGS NF, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "MesloLGS NF, MesloLGS Nerd Font, Menlo, Monaco, 'Courier New', monospace",
     "editor.fontSize": 14,
     "workbench.colorTheme": "One Dark Pro",
     "workbench.iconTheme": "vscode-icons",
@@ -10,5 +10,51 @@
         "plaintext": false,
         "markdown": false,
         "scminput": false
-    }
+    },
+    "files.simpleDialog.enable": true,
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "workbench.commandPalette.experimental.enableNaturalLanguageSearch": false,
+    "viceroy.config.lastVersion": "0.53.202032",
+    "files.watcherExclude": {
+        "**/build/**": true,
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/.hg/store/**": true
+    },
+    "files.exclude": {
+        ".viceroy": true,
+        "apollo-overrides": true,
+        "release-info": true,
+        "src/*/build": false,
+        "build": false,
+        "env": true,
+        "packageInfo*": true,
+        ".bemol": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true
+    },
+    "search.exclude": {
+        "env": true,
+        "src/*/build": true,
+        "build": true,
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true
+    },
+    "[brazilPackageConfig]": {
+        "workbench.editor.languageDetection": false
+    },
+    "viceroy.config.internal.lastUpdateTime": "2025-04-25T16:52:54.648Z",
+    "amazonQ.suppressPrompts": {
+        "amazonQChatDisclaimer": true
+    },
+    "terminal.integrated.fontSize": 14,
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false
 }
