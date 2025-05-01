@@ -201,8 +201,25 @@
         "when": "!inputFocus || (editorFocus && neovim.init && neovim.mode != 'insert')"
     },
     {
+        "key": "escape",
+        "command": "workbench.action.togglePanel",
+        "when": "problemFocus"
+    },
+    {
         "key": "shift+\\",
         "command": "workbench.view.explorer",
         "when": "viewContainer.workbench.view.explorer.enabled && editorTextFocus && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "cmd+o",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal.o && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'",
+        "args": "<C-r>"
+    },
+    {
+        "key": "cmd+i",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal.i && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'",
+        "args": "<C-r>"
     }
 ]
