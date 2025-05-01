@@ -39,7 +39,7 @@ return {
           keymaps = {
             -- TODO: add which key details
             init_selection = "<C-space>",
-            node_incremental = "<C-space>",
+            node_incremental = "v",
             scope_incremental = false,
             node_decremental = "<bs>",
           }

@@ -22,7 +22,7 @@ require("lazy").setup("plugins", {
     -- by default, use the enabled list to restrict plugin loading if we are in vs code
     cond = vim.g.vscode and function(plugin)
       return vim.tbl_contains(enabled, plugin.name)
-    end or nil,  
+    end or nil,
   }
 })
 
