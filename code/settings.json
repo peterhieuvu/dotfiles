@@ -1,73 +1,78 @@
 {
-    "telemetry.telemetryLevel": "off",
-    "telemetry.feedback.enabled": false,
-    "editor.fontFamily": "MesloLGS NF, MesloLGS Nerd Font, Menlo, Monaco, 'Courier New', monospace",
-    "editor.fontSize": 14,
-    "workbench.colorTheme": "One Dark Pro",
-    "workbench.iconTheme": "vscode-icons",
-    "github.copilot.enable": {
-        "*": false,
-        "plaintext": false,
-        "markdown": false,
-        "scminput": false
-    },
-    "files.simpleDialog.enable": true,
-    "workbench.settings.enableNaturalLanguageSearch": false,
-    "workbench.commandPalette.experimental.enableNaturalLanguageSearch": false,
-    "viceroy.config.lastVersion": "0.53.202036",
-    "files.watcherExclude": {
-        "**/build/**": true,
-        "**/.git/objects/**": true,
-        "**/.git/subtree-cache/**": true,
-        "**/.hg/store/**": true
-    },
-    "files.exclude": {
-        ".viceroy": true,
-        "apollo-overrides": true,
-        "release-info": true,
-        "src/*/build": false,
-        "build": false,
-        "env": true,
-        "packageInfo*": true,
-        ".bemol": true,
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/.DS_Store": true,
-        "**/Thumbs.db": true
-    },
-    "search.exclude": {
-        "env": true,
-        "src/*/build": true,
-        "build": true,
-        "**/node_modules": true,
-        "**/bower_components": true,
-        "**/*.code-search": true
-    },
-    "[brazilPackageConfig]": {
-        "workbench.editor.languageDetection": false
-    },
-    "viceroy.config.internal.lastUpdateTime": "2025-04-28T16:50:47.564Z",
-    "amazonQ.suppressPrompts": {
-        "amazonQChatDisclaimer": true
-    },
-    "terminal.integrated.fontSize": 14,
-    "extensions.experimental.affinity": {
-        "asvetliakov.vscode-neovim": 1
-    },
-    "telemetry.enableCrashReporter": false,
-    "telemetry.enableTelemetry": false,
-    "editor.smoothScrolling": true,
-    "viceroy.marketplace.extensionUpdateChannels": {
-        "asbx.amzn-cline": "stable",
-        "mchpatr.datapath-language-server": "stable",
-        "amzn.amzn-pippin": "stable",
-        "amzn.vscode-isengard-tooltip": "stable",
-        "mchpatr.datapath-vscode": "stable",
-        "amazon.controls-dsl": "stable",
-        "marklel.vscode-brazil": "stable",
-        "amzn.AWSGuruQLinter": "stable",
-        "kaze.vscode-plugin-contribution-model": "stable"
-    },
-    "terminal.integrated.defaultProfile.linux": "zsh"
+  "[brazilPackageConfig]": {
+    "workbench.editor.languageDetection": false
+  },
+  "amazonQ.suppressPrompts": {
+    "amazonQChatDisclaimer": true
+  },
+  "editor.accessibilitySupport": "off",
+  "editor.fontFamily": "MesloLGS NF, MesloLGS Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 14,
+  "editor.smoothScrolling": true,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/Thumbs.db": true,
+    ".bemol": true,
+    ".viceroy": true,
+    "apollo-overrides": true,
+    "build": false,
+    "env": true,
+    "packageInfo*": true,
+    "release-info": true,
+    "src/*/build": false
+  },
+  "files.simpleDialog.enable": true,
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.hg/store/**": true,
+    "**/build/**": true
+  },
+  "github.copilot.enable": {
+    "*": false,
+    "markdown": false,
+    "plaintext": false,
+    "scminput": false
+  },
+  "search.exclude": {
+    "**/*.code-search": true,
+    "**/bower_components": true,
+    "**/node_modules": true,
+    "build": true,
+    "env": true,
+    "src/*/build": true
+  },
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  "telemetry.feedback.enabled": false,
+  "telemetry.telemetryLevel": "off",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.env.osx": {
+    "Q_NEW_SESSION": "1"
+  },
+  "terminal.integrated.fontSize": 14,
+  "viceroy.config.internal.lastUpdateTime": "2025-06-04T15:15:53.890Z",
+  "viceroy.config.lastVersion": "0.53.202108",
+  "viceroy.config.resolveSymlinks": "resolve",
+  "viceroy.marketplace.extensionUpdateChannels": {
+    "amazon.controls-dsl": "stable",
+    "amzn.AWSGuruQLinter": "stable",
+    "amzn.amzn-pippin": "stable",
+    "amzn.vscode-isengard-tooltip": "stable",
+    "asbx.amzn-cline": "stable",
+    "kaze.vscode-plugin-contribution-model": "stable",
+    "marklel.vscode-brazil": "stable",
+    "mchpatr.datapath-language-server": "stable",
+    "mchpatr.datapath-vscode": "stable"
+  },
+  "workbench.colorTheme": "One Dark Pro",
+  "workbench.commandPalette.experimental.enableNaturalLanguageSearch": false,
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.settings.enableNaturalLanguageSearch": false
 }

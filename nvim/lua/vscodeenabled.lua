@@ -76,22 +76,30 @@ if vim.g.vscode then
   vim.keymap.set('n', '<S-l>', call('workbench.action.nextEditor'))
 
   -- yank to system clipboard
-  -- vim.keymap.set({"n", "v"}, "<leader>y", '"+y')
+  vim.keymap.set({"n", "v"}, "<leader>y", '"+y')
   -- paste from system clipboard
-  -- vim.keymap.set({"n", "v"}, "<leader>p", '"+p')
+  vim.keymap.set({"n", "v"}, "<leader>p", '"+p')
 
   vim.keymap.set('n', 'gK', call('editor.action.triggerParameterHints'))
+  vim.keymap.set('n', '<leader>sr', call('references-view.findReferences'))
+  vim.keymap.set('n', 'gr', call('editor.action.goToReferences'))
 
   -- problem management
   vim.keymap.set('n', '<leader>sd', call('workbench.actions.view.problems'))
   vim.keymap.set('n', ']d', call('editor.action.marker.next'))
-  vim.keymap.set('n', '[d', call('editor.action.marker.previous'))
+  vim.keymap.set('n', '[d', call('editor.action.marker.prev'))
 
-  vim.keymap.set('n', '<leader>cr', call('editor.action.refactor'))
-  vim.keymap.set('n', '<leader>ca', call('problems.action.showQuickFixes'))
+  vim.keymap.set('n', '<leader>cr', call('editor.action.rename'))
+  vim.keymap.set('n', '<leader>ca', call('editor.action.quickFix'))
 
-  vim.keymap.set('n', '<leader>bd', call('workbench.action.closeWindow'))
+  vim.keymap.set('n', '<leader>qq', call('workbench.action.closeWindow'))
+  vim.keymap.set('n', '<leader>bd', call('workbench.action.closeActiveEditor'))
   vim.keymap.set('n', '<leader>wo', call('workbench.action.files.openFile'))
+
+  vim.keymap.set('n', '<C-h>', call('workbench.action.navigateLeft'))
+  vim.keymap.set('n', '<C-l>', call('workbench.action.navigateRight'))
+  vim.keymap.set('n', '<C-j>', call('workbench.action.navigateDown'))
+  vim.keymap.set('n', '<C-k>', call('workbench.action.navigateUp'))
 
   vim.keymap.set(
     'n',
@@ -116,7 +124,6 @@ if vim.g.vscode then
   -- TODO: == for reformating
   --[[
   keymap('n', '<Leader>xr', notify 'references-view.findReferences', { silent = true }) -- language references
-  keymap('n', '<Leader>xd', notify 'workbench.actions.view.problems', { silent = true }) -- language diagnostics
   keymap('n', 'gr', notify 'editor.action.goToReferences', { silent = true })
   keymap('n', '<Leader>rn', notify 'editor.action.rename', { silent = true })
   keymap('n', '<Leader>fm', notify 'editor.action.formatDocument', { silent = true })
